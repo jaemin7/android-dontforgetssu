@@ -1,0 +1,116 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/apppicture" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="회원가입"
+            android:textSize="28dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:fontFamily="@font/inter"
+                android:textSize="18dp"
+                android:hint="이름" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="25dp"
+                android:fontFamily="@font/inter"
+                android:hint="아이디"
+                android:textSize="18dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="25dp"
+                android:fontFamily="@font/inter"
+                android:textSize="18dp"
+                android:hint="비밀번호" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="25dp"
+                android:fontFamily="@font/inter"
+                android:textSize="18dp"
+                android:hint="비밀번호 확인" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+
+            <CheckBox
+                android:id="@+id/checkBox2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="이용약관 동의"
+                android:fontFamily="@font/inter"
+                android:layout_marginLeft="20dp"/>
+
+            <CheckBox
+                android:id="@+id/checkBox3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="개인정보 취급방침 동의"
+                android:fontFamily="@font/inter"
+                android:layout_marginLeft="20dp"/>
+
+            <Button
+                android:id="@+id/signup_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="30dp"
+                android:fontFamily="@font/inter"
+                android:textStyle="bold"
+                android:backgroundTint="@color/apptheme"
+                android:text="회원가입"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:textSize="18dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
