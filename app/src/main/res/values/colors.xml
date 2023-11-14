@@ -4,4 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="apptheme">#387BFE</color>
     <color name="light_apptheme">#E0EAFF</color>
+    <color name="light_gray">#F6F6F6</color>
+    <color name="gray">#AAAAAA</color>
+    <color name="light_gray_letter">#BDBDBD</color>
+    <color name="hint_gray">#61646B</color>
 </resources>
