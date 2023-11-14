@@ -23,7 +23,7 @@
             android:textStyle="bold"
             android:gravity="center"
             android:text="회원가입"
-            android:textSize="28dp" />
+            android:textSize="28dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,7 +38,9 @@
                 android:layout_marginRight="25dp"
                 android:fontFamily="@font/inter"
                 android:textSize="18dp"
-                android:hint="이름" />
+                android:hint="이름"
+                android:background="@drawable/gray_edge_edit_text"
+                android:textColorHint="@color/hint_gray"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -48,7 +50,9 @@
                 android:layout_marginRight="25dp"
                 android:fontFamily="@font/inter"
                 android:hint="아이디"
-                android:textSize="18dp"/>
+                android:textSize="18dp"
+                android:background="@drawable/gray_edge_edit_text"
+                android:textColorHint="@color/hint_gray"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -58,7 +62,9 @@
                 android:layout_marginRight="25dp"
                 android:fontFamily="@font/inter"
                 android:textSize="18dp"
-                android:hint="비밀번호" />
+                android:hint="비밀번호"
+                android:background="@drawable/gray_edge_edit_text"
+                android:textColorHint="@color/hint_gray"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -68,7 +74,9 @@
                 android:layout_marginRight="25dp"
                 android:fontFamily="@font/inter"
                 android:textSize="18dp"
-                android:hint="비밀번호 확인" />
+                android:hint="비밀번호 확인"
+                android:background="@drawable/gray_edge_edit_text"
+                android:textColorHint="@color/hint_gray"/>
 
         </LinearLayout>
 
@@ -84,7 +92,8 @@
                 android:layout_height="wrap_content"
                 android:text="이용약관 동의"
                 android:fontFamily="@font/inter"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/hint_gray"/>
 
             <CheckBox
                 android:id="@+id/checkBox3"
@@ -92,22 +101,22 @@
                 android:layout_height="wrap_content"
                 android:text="개인정보 취급방침 동의"
                 android:fontFamily="@font/inter"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/hint_gray"/>
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/signup_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="25dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="30dp"
+                android:layout_marginRight="25dp"
                 android:fontFamily="@font/inter"
                 android:textStyle="bold"
-                android:backgroundTint="@color/apptheme"
                 android:text="회원가입"
-                android:paddingBottom="15dp"
-                android:paddingTop="15dp"
-                android:textSize="18dp"/>
+                android:textSize="18dp"
+                android:textColor="@color/white"
+                android:background="@drawable/apptheme_button"/>
 
         </LinearLayout>
 
