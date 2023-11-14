@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home_Fragment"
+        android:title="메인"
+        android:icon="@drawable/icon_home"/>
+
+    <item
+        android:id="@+id/management_Fragment"
+        android:title="기록 관리"
+        android:icon="@drawable/icon_management"/>
+
+    <item
+        android:id="@+id/my_Fragment"
+        android:title="마이페이지"
+        android:icon="@drawable/icon_my"/>
+
+</menu>
