@@ -80,12 +80,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_marginTop="10dp">
+>
 
             <CheckBox
                 android:id="@+id/checkBox2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:text="이용약관 동의"
                 android:fontFamily="@font/inter"
                 android:layout_marginLeft="20dp"
@@ -94,18 +94,17 @@
             <CheckBox
                 android:id="@+id/checkBox3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:text="개인정보 취급방침 동의"
                 android:fontFamily="@font/inter"
                 android:layout_marginLeft="20dp"
                 android:textColor="@color/hint_gray"/>
 
-            <android.widget.Button
+            <Button
                 android:id="@+id/signup_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
-                android:layout_marginTop="50dp"
                 android:layout_marginRight="25dp"
                 android:fontFamily="@font/inter"
                 android:textStyle="bold"
