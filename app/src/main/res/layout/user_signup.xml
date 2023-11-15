@@ -6,30 +6,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/apppicture" />
-
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:text="회원가입"
-            android:textSize="28dp"/>
+            android:text="회원 가입"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:fontFamily="@font/suit_heavy"
+            android:textSize="30dp"
+            android:layout_marginTop="40dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="60dp">
 
             <EditText
                 android:layout_width="match_parent"
@@ -63,6 +57,7 @@
                 android:fontFamily="@font/inter"
                 android:textSize="18dp"
                 android:hint="비밀번호"
+                android:inputType="textPassword"
                 android:background="@drawable/gray_edge_edit_text"
                 android:textColorHint="@color/hint_gray"/>
 
@@ -75,6 +70,7 @@
                 android:fontFamily="@font/inter"
                 android:textSize="18dp"
                 android:hint="비밀번호 확인"
+                android:inputType="textPassword"
                 android:background="@drawable/gray_edge_edit_text"
                 android:textColorHint="@color/hint_gray"/>
 
@@ -109,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginRight="25dp"
                 android:fontFamily="@font/inter"
                 android:textStyle="bold"

@@ -1,0 +1,138 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="빌려준 돈 기록"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:fontFamily="@font/suit_heavy"
+        android:textSize="30dp"
+        android:layout_marginTop="40dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="해외 돈 거래"
+            android:paddingLeft="270dp"
+            android:paddingRight="20dp"
+            android:fontFamily="@font/suit_extrabold"/>
+
+        <android.widget.EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp"
+            android:fontFamily="@font/inter"
+            android:textSize="18dp"
+            android:background="@drawable/gray_edge_edit_text"
+            android:hint="금액 입력(원)"
+            android:textColorHint="@color/hint_gray"/>
+
+        <android.widget.EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp"
+            android:fontFamily="@font/inter"
+            android:textSize="18dp"
+            android:background="@drawable/gray_edge_edit_text"
+            android:hint="해당년도.월.일"
+            android:textColorHint="@color/hint_gray"/>
+
+        <android.widget.EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp"
+            android:fontFamily="@font/inter"
+            android:textSize="18dp"
+            android:background="@drawable/gray_edge_edit_text"
+            android:hint="해당년도.월.일"
+            android:textColorHint="@color/hint_gray"/>
+
+        <Switch
+            android:id="@+id/switch2"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="이자 유무"
+            android:paddingLeft="285dp"
+            android:paddingRight="20dp"
+            android:fontFamily="@font/suit_extrabold"/>
+
+        <android.widget.EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp"
+            android:fontFamily="@font/inter"
+            android:textSize="18dp"
+            android:background="@drawable/gray_edge_edit_text"
+            android:hint="금액 입력(원)"
+            android:textColorHint="@color/hint_gray"/>
+
+        <android.widget.EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp"
+            android:fontFamily="@font/inter"
+            android:textSize="18dp"
+            android:background="@drawable/gray_edge_edit_text"
+            android:hint="0.0%"
+            android:textColorHint="@color/hint_gray"/>
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/navigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemBackground="@color/light_apptheme"
+            app:itemIconSize="40dp"
+            app:itemIconTint="@drawable/menu_click_color"
+            app:itemTextColor="@drawable/menu_click_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/navigation_menu"
+            tools:ignore="MissingConstraints" />
+
+        <android.widget.Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="100dp"
+            android:background="@drawable/save_button"
+            android:fontFamily="@font/suit_bold"
+            android:text="기록하기"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteX="25dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

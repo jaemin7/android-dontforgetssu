@@ -22,6 +22,7 @@
             android:fontFamily="@font/dovemayo_gothic"
             android:gravity="center"
             android:text="까먹지마SSU"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="28dp" />
 
@@ -54,6 +55,7 @@
             android:textSize="18dp"
             android:background="@drawable/gray_edge_edit_text"
             android:hint="비밀번호"
+            android:inputType="textPassword"
             android:textColorHint="@color/hint_gray"/>
 
     </LinearLayout>
@@ -98,7 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="25dp"
             android:fontFamily="@font/inter"
             android:textStyle="bold"
