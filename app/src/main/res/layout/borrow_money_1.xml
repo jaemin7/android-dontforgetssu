@@ -9,7 +9,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="빌려준 돈 기록"
+        android:text="빌린 돈 기록"
         android:textColor="@color/black"
         android:textAlignment="center"
         android:fontFamily="@font/suit_heavy"
@@ -23,7 +23,7 @@
         android:layout_marginTop="20dp">
 
         <Switch
-            android:id="@+id/switch1"
+            android:id="@+id/global_switch"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:text="해외 돈 거래"
@@ -68,7 +68,7 @@
             android:textColorHint="@color/hint_gray"/>
 
         <Switch
-            android:id="@+id/switch2"
+            android:id="@+id/interest_switch"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:text="이자 유무"
@@ -77,10 +77,12 @@
             android:fontFamily="@font/suit_extrabold"/>
 
         <android.widget.EditText
+            android:id="@+id/interest_1"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="10dp"
+            android:visibility="invisible"
             android:layout_marginRight="25dp"
             android:fontFamily="@font/inter"
             android:textSize="18dp"
@@ -89,12 +91,14 @@
             android:textColorHint="@color/hint_gray"/>
 
         <android.widget.EditText
+            android:id="@+id/interest_2"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="25dp"
             android:fontFamily="@font/inter"
+            android:visibility="invisible"
             android:textSize="18dp"
             android:background="@drawable/gray_edge_edit_text"
             android:hint="0.0%"

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:fontFamily="@font/suit_heavy"
-        android:text="빌려준 사람 정보"
+        android:text="빌린 사람 정보"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="30dp" />
