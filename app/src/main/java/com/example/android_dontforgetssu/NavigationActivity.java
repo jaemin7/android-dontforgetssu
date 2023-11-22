@@ -30,15 +30,14 @@ public class NavigationActivity extends AppCompatActivity {
         replaceFragment(new HomeFragment());
         binding.navigationView.setSelectedItemId(R.id.home_Fragment);
         binding.navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-
             @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.home_Fragment) {
                     replaceFragment(new HomeFragment());
-                } else if (itemId == R.id.management_Fragment) {
-                    replaceFragment(new ManagementFragment());
+                } else if (itemId == R.id.managementlend_Fragment) {
+                    replaceFragment(new ManagementLendFragment());
                 } else if (itemId == R.id.my_Fragment) {
                     replaceFragment(new MyFragment());
                 }
