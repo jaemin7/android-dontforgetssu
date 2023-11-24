@@ -1,26 +1,56 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:fontFamily="@font/suit_heavy"
-        android:text="빌린 사람 정보"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="30dp" />
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_gravity="center">
+
+        <Button
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/baseline_arrow_back_ios_new_24"
+            android:text="."
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/suit_heavy"
+            android:text="빌린 사람 "
+            android:textColor="@color/apptheme"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:fontFamily="@font/suit_heavy"
+            android:text="정보"
+            android:textColor="@android:color/black"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+
+    </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <android.widget.EditText
             android:layout_width="match_parent"
@@ -51,10 +81,11 @@
             android:layout_width="60dp"
             android:layout_height="50dp"
             android:layout_gravity="right"
-            android:layout_marginRight="25dp"
             android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp"
             android:background="@drawable/apptheme_light_button"
-            android:src="@drawable/baseline_contact_phone_24" />
+            android:src="@drawable/baseline_contact_phone_24"
+            android:contentDescription="전화 걸기 버튼"/>
 
         <android.widget.EditText
             android:layout_width="match_parent"
@@ -103,4 +134,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

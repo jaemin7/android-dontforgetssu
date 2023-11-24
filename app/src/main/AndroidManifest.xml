@@ -16,6 +16,11 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
+            android:name=".SignUpActivity"
+            android:label="회원가입">
+        </activity>
+
+        <activity
             android:name=".LoginActivity"
             android:exported="true">
 
@@ -31,6 +36,7 @@
             android:exported="true">
 
         </activity>
+
     </application>
 
 </manifest>

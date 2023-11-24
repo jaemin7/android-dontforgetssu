@@ -15,16 +15,31 @@
             android:layout_height="wrap_content"
             android:src="@drawable/apppicture" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
         <TextView
             android:id="@+id/textview1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/dovemayo_gothic"
-            android:gravity="center"
-            android:text="까먹지마SSU"
+            android:text="까먹지마"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="28dp" />
+            <TextView
+                android:id="@+id/textview2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/dovemayo_gothic"
+                android:text="SSU"
+                android:textColor="@color/apptheme"
+                android:textStyle="bold"
+                android:textSize="28dp" />
+
+    </LinearLayout>
 
     </LinearLayout>
 

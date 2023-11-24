@@ -1,5 +1,6 @@
 package com.example.android_dontforgetssu;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
