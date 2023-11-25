@@ -7,7 +7,7 @@
         android:icon="@drawable/icon_home"/>
 
     <item
-        android:id="@+id/managementlend_Fragment"
+        android:id="@+id/management_Fragment"
         android:title="기록 관리"
         android:icon="@drawable/icon_management"/>
 
