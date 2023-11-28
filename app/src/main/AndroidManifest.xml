@@ -37,6 +37,35 @@
 
         </activity>
 
+        <activity android:name=".RecordMoneyActivity">
+        </activity>
+
+        <activity android:name=".BorrowMoney1Activity">
+
+        </activity>
+        <activity android:name=".BorrowMoney2Activity">
+
+        </activity>
+        <activity android:name=".LendMoney1Activity">
+
+        </activity>
+        <activity android:name=".RecordInformationActivity">
+
+        </activity>
+        <activity android:name=".PromissoryNoteActivity">
+
+        </activity>
+
+
+        <activity android:name=".LendMoney2Activity">
+
+        </activity>
+        <activity android:name=".RecordInformationActivity2">
+
+        </activity>
+        <activity android:name=".PromissoryNote2Activity">
+
+        </activity>
     </application>
 
 </manifest>

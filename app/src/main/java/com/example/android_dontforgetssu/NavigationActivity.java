@@ -7,8 +7,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.android_dontforgetssu.databinding.ActivityNavigationBinding;
 import com.google.android.material.navigation.NavigationBarView;
@@ -45,6 +48,7 @@ public class NavigationActivity extends AppCompatActivity {
                 return true;
             }
         });
+
     }
 
     private void replaceFragment(Fragment fragment) {
@@ -52,4 +56,5 @@ public class NavigationActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(binding.mainFrameLayout.getId(), fragment).commit();
     }
+
 }

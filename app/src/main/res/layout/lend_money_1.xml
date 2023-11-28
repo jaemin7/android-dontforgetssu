@@ -16,6 +16,7 @@
         android:layout_gravity="center">
 
         <Button
+            android:id="@+id/back_btn"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@drawable/baseline_arrow_back_ios_new_24"
@@ -118,7 +119,8 @@
             android:fontFamily="@font/inter"
             android:hint="금액 입력(원)"
             android:textColorHint="@color/hint_gray"
-            android:textSize="18dp" />
+            android:textSize="18dp"
+            android:visibility="invisible"/>
 
         <android.widget.EditText
             android:layout_width="match_parent"
@@ -130,7 +132,8 @@
             android:fontFamily="@font/inter"
             android:hint="0.0%"
             android:textColorHint="@color/hint_gray"
-            android:textSize="18dp" />
+            android:textSize="18dp"
+            android:visibility="invisible"/>
 
     </LinearLayout>
 

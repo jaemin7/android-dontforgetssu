@@ -10,17 +10,23 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
-    public void onCreate(Bundle savedInstanceState){
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_login);
-        Button b = (Button)findViewById(R.id.login_btn);
+
+        Button loginButton = findViewById(R.id.login_btn);
         TextView signUpTextView = findViewById(R.id.textView3);
-        b.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, NavigationActivity.class);
                 startActivity(intent);
             }
         });
+
         signUpTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
