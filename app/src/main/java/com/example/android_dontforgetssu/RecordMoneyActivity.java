@@ -17,7 +17,7 @@ public class RecordMoneyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 'Borrow' 버튼을 눌렀을 때 처리할 코드 추가
-                Intent intent = new Intent(RecordMoneyActivity.this, LendMoney1Activity.class);
+                Intent intent = new Intent(RecordMoneyActivity.this, LendMoneyRecordActivity.class);
                 startActivity(intent);
             }
         });
@@ -27,7 +27,7 @@ public class RecordMoneyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 'Lend' 버튼을 눌렀을 때 처리할 코드 추가
-                Intent intent = new Intent(RecordMoneyActivity.this, BorrowMoney1Activity.class);
+                Intent intent = new Intent(RecordMoneyActivity.this, BorrowMoneyRecordActivity.class);
                 startActivity(intent);
             }
         });

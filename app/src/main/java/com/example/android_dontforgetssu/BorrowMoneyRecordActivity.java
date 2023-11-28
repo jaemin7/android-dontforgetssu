@@ -10,17 +10,17 @@ import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class BorrowMoney1Activity extends AppCompatActivity {
+public class BorrowMoneyRecordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.borrow_money_1);
+        setContentView(R.layout.borrow_money_record);
 
         Button button2 = findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // 버튼이 클릭되었을 때 실행되는 코드
-                Intent intent = new Intent(BorrowMoney1Activity.this, BorrowMoney2Activity.class);
+                Intent intent = new Intent(BorrowMoneyRecordActivity.this, BorrowRecordInformationActivity.class);
                 startActivity(intent);
             }
         });
@@ -40,7 +40,7 @@ public class BorrowMoney1Activity extends AppCompatActivity {
         Button back_btn = findViewById(R.id.back_btn);
         back_btn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Intent intent = new Intent(BorrowMoney1Activity.this, RecordMoneyActivity.class);
+                Intent intent = new Intent(BorrowMoneyRecordActivity.this, RecordMoneyActivity.class);
                 startActivity(intent);
                 finish();
             }

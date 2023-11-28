@@ -35,19 +35,19 @@
     <activity android:name=".RecordMoneyActivity">
     </activity>
 
-    <activity android:name=".BorrowMoney1Activity">
+    <activity android:name=".BorrowMoneyRecordActivity">
 
     </activity>
     <activity android:name=".BorrowMoney2Activity">
 
     </activity>
-    <activity android:name=".LendMoney1Activity">
+    <activity android:name=".LendMoneyRecordActivity">
 
     </activity>
-    <activity android:name=".RecordInformationActivity">
+    <activity android:name=".LendRecordInformationActivity">
 
     </activity>
-    <activity android:name=".PromissoryNoteActivity">
+    <activity android:name=".LendPromissoryNoteActivity">
 
     </activity>
 
@@ -55,10 +55,10 @@
     <activity android:name=".LendMoney2Activity">
 
     </activity>
-    <activity android:name=".RecordInformationActivity2">
+    <activity android:name=".BorrowRecordInformationActivity">
 
     </activity>
-    <activity android:name=".PromissoryNote2Activity">
+    <activity android:name=".BorrowPromissoryNoteActivity">
 
     </activity>
 
