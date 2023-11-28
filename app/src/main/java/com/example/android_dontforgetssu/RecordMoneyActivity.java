@@ -14,8 +14,7 @@ public class RecordMoneyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         binding = RecordMoneyBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
-        setContentView(view);
+        setContentView(binding.getRoot());
 
         binding.lendMoneyRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -23,7 +22,7 @@ public class RecordMoneyActivity extends AppCompatActivity {
                 // 'Borrow' 버튼을 눌렀을 때 처리할 코드 추가
                 Intent intent = new Intent(RecordMoneyActivity.this, LendMoneyRecordActivity.class);
                 startActivity(intent);
-
+                finish();
             }
         });
 
@@ -33,10 +32,10 @@ public class RecordMoneyActivity extends AppCompatActivity {
                 // 'Lend' 버튼을 눌렀을 때 처리할 코드 추가
                 Intent intent = new Intent(RecordMoneyActivity.this, BorrowMoneyRecordActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
-        Button back_btn = findViewById(R.id.back_btn);
-        back_btn.setOnClickListener(new View.OnClickListener(){
+        binding.backBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 Intent intent = new Intent(RecordMoneyActivity.this,HomeFragment.class);
                 startActivity(intent);

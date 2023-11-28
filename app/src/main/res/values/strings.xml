@@ -1,3 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <resources>
     <string name="app_name">android-dontforgetssu</string>
+    <string-array name="global_select_dialog">
+        <item>미국 환율 USD($)</item>
+        <item>유럽 환율 EUR(€)</item>
+        <item>일본 환율 JPY(¥)</item>
+        <item>중국 환율 CNY(¥)</item>
+        <item>베트남 환율 VND(₫)</item>
+    </string-array>
+    <string-array name="exchange_rate_hint">
+        <item>ex) 1달러 = 1300원</item>
+        <item>ex) 1유로 = 1400원</item>
+        <item>ex) 1엔 = 8.8원</item>
+        <item>ex) 1위안 = 180원</item>
+        <item>ex) 1동 = 0.05원</item>
+    </string-array>
 </resources>
