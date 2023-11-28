@@ -182,7 +182,7 @@
         android:layout_marginTop="40dp">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/homebutton"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_width="match_parent"
