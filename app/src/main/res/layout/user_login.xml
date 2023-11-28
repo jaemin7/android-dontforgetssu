@@ -50,6 +50,7 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/userEmail"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="25dp"
@@ -61,6 +62,7 @@
             android:textColorHint="@color/hint_gray"/>
 
         <EditText
+            android:id="@+id/userPassword"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="25dp"

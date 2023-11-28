@@ -26,6 +26,7 @@
             android:layout_marginTop="60dp">
 
             <EditText
+                android:id="@+id/signName"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="25dp"
@@ -37,6 +38,7 @@
                 android:textColorHint="@color/hint_gray"/>
 
             <EditText
+                android:id="@+id/signEmail"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="25dp"
@@ -49,6 +51,7 @@
                 android:textColorHint="@color/hint_gray"/>
 
             <EditText
+                android:id="@+id/signPassword"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginLeft="25dp"
@@ -57,19 +60,6 @@
                 android:fontFamily="@font/inter"
                 android:textSize="18dp"
                 android:hint="비밀번호"
-                android:inputType="textPassword"
-                android:background="@drawable/gray_edge_edit_text"
-                android:textColorHint="@color/hint_gray"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="25dp"
-                android:fontFamily="@font/inter"
-                android:textSize="18dp"
-                android:hint="비밀번호 확인"
                 android:inputType="textPassword"
                 android:background="@drawable/gray_edge_edit_text"
                 android:textColorHint="@color/hint_gray"/>

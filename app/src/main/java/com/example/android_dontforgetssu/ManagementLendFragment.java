@@ -1,73 +1,99 @@
 package com.example.android_dontforgetssu;
 
+import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import com.example.android_dontforgetssu.databinding.FragmentManagementLendBinding;
+import com.example.android_dontforgetssu.databinding.TransactionListItemBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ManagementLendFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
 public class ManagementLendFragment extends Fragment {
-
     private FragmentManagementLendBinding binding;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public ManagementLendFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ManagementFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ManagementLendFragment newInstance(String param1, String param2) {
-        ManagementLendFragment fragment = new ManagementLendFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private ArrayAdapter<String> adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         binding = FragmentManagementLendBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
+        ArrayList<TransactionListItem> items = new ArrayList<>();
+        items.add(new TransactionListItem(R.drawable.apppicture, "임재민", "10000", "가나다라마바사아자", "상환까지 D-3"));
+        items.add(new TransactionListItem(R.drawable.icon_boy, "최고은", "200000", "차카타파하", "상환까지 ~~~"));
+        items.add(new TransactionListItem(R.drawable.icon_girl, "정상진", "3000000", "응애응애응애응애", "상환까지 ~~~~~"));
+
+        binding.transactionRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.transactionRecyclerView.setAdapter(new TransactionAdapter(items));
 
         return view;
+    }
+
+    private class TransactionViewHolder extends RecyclerView.ViewHolder {
+        private TransactionListItemBinding binding;
+
+        private TransactionViewHolder(TransactionListItemBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+        private void bind(TransactionListItem item) {
+            binding.transactionImage.setImageResource(item.getImage());
+            binding.transactionName.setText(item.getName());
+            binding.transactionMoney.setText(item.getMoney());
+            binding.transactionMemo.setText(item.getMemo());
+            binding.transactionDate.setText(item.getDate());
+        }
+    }
+
+    private class TransactionAdapter extends RecyclerView.Adapter<TransactionViewHolder>{
+
+        private ArrayList<TransactionListItem> items;
+
+        public TransactionAdapter(ArrayList<TransactionListItem> items) {
+            this.items = items;
+        }
+        @NonNull
+        @Override
+        public TransactionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.transaction_list_item, parent, false);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = binding.transactionRecyclerView.getChildAdapterPosition(v);
+                    TransactionListItem item = items.get(position);
+                    Log.d("transaction", "item clicked: " + item.getName());
+                }
+            });
+
+            return new TransactionViewHolder(TransactionListItemBinding.bind(view));
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull TransactionViewHolder holder, int position) {
+            TransactionListItem item = items.get(position);
+            holder.bind(item);
+        }
+
+        @Override
+        public int getItemCount() {
+            return items.size();
+        }
     }
 }
