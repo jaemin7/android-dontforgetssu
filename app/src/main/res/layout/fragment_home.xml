@@ -182,7 +182,7 @@
         android:layout_marginTop="40dp">
 
             <Button
-                android:id="@+id/homebutton"
+                android:id="@+id/record_money_button"
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_width="match_parent"
@@ -204,7 +204,6 @@
         <Button
             android:id="@+id/button2"
             android:layout_gravity="center"
-
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"

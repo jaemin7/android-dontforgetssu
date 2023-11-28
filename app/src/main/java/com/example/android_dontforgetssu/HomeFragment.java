@@ -62,7 +62,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        Button homeButton = view.findViewById(R.id.homebutton);
+        Button homeButton = view.findViewById(R.id.record_money_button);
         homeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent recordMoneyIntent = new Intent(getActivity(), RecordMoneyActivity.class);

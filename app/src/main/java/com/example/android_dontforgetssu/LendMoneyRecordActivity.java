@@ -15,7 +15,7 @@ public class LendMoneyRecordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lend_money_record);
 
-        Button button2 = findViewById(R.id.button2);
+        Button button2 = findViewById(R.id.lend_record_information_button);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

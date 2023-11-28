@@ -7,23 +7,27 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.android_dontforgetssu.databinding.RecordMoneyBinding;
+
 public class RecordMoneyActivity extends AppCompatActivity {
+    private RecordMoneyBinding binding;
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.record_money);
+        binding = RecordMoneyBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
-        Button borrowButton = findViewById(R.id.button1);
-        borrowButton.setOnClickListener(new View.OnClickListener() {
+        binding.lendMoneyRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 'Borrow' 버튼을 눌렀을 때 처리할 코드 추가
                 Intent intent = new Intent(RecordMoneyActivity.this, LendMoneyRecordActivity.class);
                 startActivity(intent);
+
             }
         });
 
-        Button lendButton = findViewById(R.id.button2);
-        lendButton.setOnClickListener(new View.OnClickListener() {
+        binding.borrowMoneyRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 'Lend' 버튼을 눌렀을 때 처리할 코드 추가
