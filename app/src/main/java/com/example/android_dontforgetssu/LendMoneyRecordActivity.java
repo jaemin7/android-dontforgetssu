@@ -12,14 +12,25 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.android_dontforgetssu.databinding.LendMoneyRecordBinding;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
 
 public class LendMoneyRecordActivity extends AppCompatActivity {
+    private EditText etLendMoney, etLendDate, etLendAcceptDate, etBorrowerName, etBorrowerPhoneNumber, etMemo, etInterest, etExchangeRate;
+    private Button btnRecordInfo;
+    private int calculated_Money;
     LendMoneyRecordBinding binding;
     AlertDialog global_select_dialog;
 
@@ -43,13 +54,24 @@ public class LendMoneyRecordActivity extends AppCompatActivity {
         binding = LendMoneyRecordBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        etBorrowerName = findViewById(R.id.lend_money_record_name_editText);
+        etBorrowerPhoneNumber = findViewById(R.id.lend_money_record_phonenumber_editText);
+        etLendMoney = findViewById(R.id.lend_money_record_money_editText);
+        etExchangeRate = findViewById(R.id.lend_money_record_exchange_rate_editText);
+        etLendDate = findViewById(R.id.lend_money_record_lend_date_editText);
+        etLendAcceptDate = findViewById(R.id.lend_money_record_accept_date_editText);
+        etInterest = findViewById(R.id.lend_money_record_interest_editText);
+        etMemo = findViewById(R.id.lend_money_record_memo_editText);
+
+        btnRecordInfo = findViewById(R.id.lend_record_information_button);
+
         binding.globalSelectSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(LendMoneyRecordActivity.this);
                     builder.setTitle("선택 가능 국가");
-                    builder.setSingleChoiceItems(R.array.global_select_dialog, 0, dialogListener);
+                    builder.setSingleChoiceItems(R.array.global_select_dialog, -1, dialogListener);
                     builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -138,5 +160,73 @@ public class LendMoneyRecordActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        btnRecordInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calculated_Money = calculateMoney(etLendMoney,etExchangeRate);
+                saveLendInfo();
+            }
+        });
+    }
+
+    private void saveLendInfo() {
+        String borrowerName = etBorrowerName.getText().toString();
+        String borrowerPhoneNumber = etBorrowerPhoneNumber.getText().toString();
+        String lendMoney = etLendMoney.getText().toString();
+        String exchangeRate = etExchangeRate.getText().toString();
+        String lendDate = etLendDate.getText().toString();
+        String lendAcceptDate = etLendAcceptDate.getText().toString();
+        String interest = etInterest.getText().toString();
+        String memo = etMemo.getText().toString();
+        String country = binding.lendMoneyRecordExchangeRateTextview.getText().toString();
+        String calculatedMoney = String.valueOf(calculated_Money);
+
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            String uid = currentUser.getUid();
+
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            CollectionReference lendInfoCollection = db.collection("Member").document(uid).collection("빌려준 정보");
+
+            LendInfo lendInfo = new LendInfo(borrowerName, borrowerPhoneNumber, lendMoney, exchangeRate, lendDate, lendAcceptDate, interest, memo, country, calculatedMoney);
+
+            lendInfoCollection.add(lendInfo)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Toast.makeText(LendMoneyRecordActivity.this, "빌려준 기록 저장 성공", Toast.LENGTH_SHORT).show();
+                            // 저장 성공 후 필요한 작업 수행
+                            Intent intent = new Intent(LendMoneyRecordActivity.this, LendRecordInformationActivity.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(LendMoneyRecordActivity.this, "빌려준 기록 저장 실패", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LendMoneyRecordActivity.this, LendRecordInformationActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+        } else {
+            // 사용자가 로그인되어 있지 않은 경우
+            // 로그인 화면으로 이동하도록 처리
+            Intent intent = new Intent(LendMoneyRecordActivity.this, LoginActivity.class);
+            startActivity(intent);
+            Toast.makeText(LendMoneyRecordActivity.this, "로그인 하세요", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private int calculateMoney(EditText etLendMoney, EditText etExchangeRate){
+        if ("한국 환율 KRW(₩)".equals(binding.lendMoneyRecordExchangeRateTextview.getText().toString())) {
+            float lend_money = Float.parseFloat(etLendMoney.getText().toString());
+            float exchange_rate = 1;
+            calculated_Money = (int) (lend_money * exchange_rate);
+        }
+        else {
+            float lend_money = Float.parseFloat(etLendMoney.getText().toString());
+            float exchange_rate = Float.parseFloat(etExchangeRate.getText().toString());
+            calculated_Money = (int) (lend_money * exchange_rate);
+        } return calculated_Money;
     }
 }
