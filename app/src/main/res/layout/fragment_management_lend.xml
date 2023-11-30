@@ -62,9 +62,16 @@
                 android:orientation="horizontal">
 
                 <ImageButton
+                    android:id="@+id/darrow"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@drawable/icon_arrow_bottom" />
+
+                <ImageButton
+                    android:id="@+id/rarrow"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/baseline_keyboard_arrow_right_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -95,9 +102,15 @@
                 android:orientation="horizontal">
 
                 <ImageButton
+                    android:id="@+id/darrow2"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@drawable/icon_arrow_bottom" />
+                <ImageButton
+                    android:id="@+id/rarrow2"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/baseline_keyboard_arrow_right_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -124,9 +137,15 @@
                 android:orientation="horizontal">
 
                 <ImageButton
+                    android:id="@+id/darrow3"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@drawable/icon_arrow_bottom" />
+                <ImageButton
+                    android:id="@+id/rarrow3"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/baseline_keyboard_arrow_right_24" />
 
                 <TextView
                     android:layout_width="wrap_content"

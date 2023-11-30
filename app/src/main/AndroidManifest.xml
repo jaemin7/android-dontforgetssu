@@ -16,6 +16,9 @@
             android:name=".TransactionListItem"
             android:exported="false" />
         <activity
+            android:name="LawyerListItem"
+            android:exported="false"/>
+        <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
