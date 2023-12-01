@@ -139,6 +139,18 @@ public class LendRecordInformationActivity extends AppCompatActivity {
                             binding.lendInformationInterest.setText(interest);
                         }
                         binding.lendInformationBorrowPerson.setText(borrowerName);
+                        //서버에서 국가에 따라 화폐 단위 바꾸기
+                        if (country.equals("미국 환율 USD($)")){
+                            binding.lendInformationLendCurrencyUnit.setText("달러($)");
+                        } else if (country.equals("유럽 환율 EUR(€)")) {
+                            binding.lendInformationLendCurrencyUnit.setText("유로(€)");
+                        } else if (country.equals("일본 환율 JPY(¥)")) {
+                            binding.lendInformationLendCurrencyUnit.setText("엔(¥)");
+                        } else if (country.equals("중국 환율 CNY(¥)")) {
+                            binding.lendInformationLendCurrencyUnit.setText("위안(¥)");
+                        } else if (country.equals("베트남 환율 VND(₫)")) {
+                            binding.lendInformationLendCurrencyUnit.setText("동(₫)");
+                        }
 
                     } else {
                         Log.d("LendRecordInfoActivity", "No such document");

@@ -25,7 +25,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:fontFamily="@font/suit_heavy"
-                    android:text=""
+                    android:text="OOO"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="30dp" />
@@ -83,7 +83,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="8dp"
-                            android:text=""
+                            android:text="0"
                             android:textSize="20dp"
                             android:textColor="@color/apptheme" />
 
@@ -117,7 +117,7 @@
                             android:id="@+id/fragment_home_lend_sum"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text=""
+                            android:text="00000"
                             android:textSize="20dp"
                             android:textStyle="bold"/>
                         <TextView
@@ -164,7 +164,7 @@
                             android:layout_height="match_parent"
 
                             android:layout_marginLeft="8dp"
-                            android:text="2"
+                            android:text="0"
                             android:textSize="20dp"
                             android:textColor="@color/apptheme" />
                         <TextView
@@ -196,7 +196,7 @@
                             android:id="@+id/fragment_home_borrow_sum"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="12,000"
+                            android:text="00000"
                             android:textSize="20dp"
                             android:textStyle="bold"/>
                         <TextView
