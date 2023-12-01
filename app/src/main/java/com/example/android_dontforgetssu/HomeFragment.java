@@ -36,8 +36,8 @@ import java.util.concurrent.atomic.AtomicReference;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
-    private TextView lendSumTextView;
-    private TextView lendCountTextView;
+    private TextView lendSumTextView,borrowSumTextView;
+    private TextView lendCountTextView,borrowCountTextView;
     private TextView currentUserName;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -55,6 +55,10 @@ public class HomeFragment extends Fragment {
 
         lendSumTextView = view.findViewById(R.id.fragment_home_lend_sum);
         lendCountTextView = view.findViewById(R.id.fragment_home_lend_number);
+
+        borrowSumTextView = view.findViewById(R.id.fragment_home_borrow_sum);
+        borrowCountTextView = view.findViewById(R.id.fragment_home_borrow_number);
+
         currentUserName = view.findViewById(R.id.fragment_home_userName);
 
         homeButton.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +69,8 @@ public class HomeFragment extends Fragment {
         });
 
         getCurrentUserName();
-        sumCalculatedNumbers();
+        sumLendCalculatedNumbers();
+        sumBorrowCalculatedNumbers();
 
         return view;
     }
@@ -102,7 +107,7 @@ public class HomeFragment extends Fragment {
         }
     }
     // 사용자의 빌려준 정보의 calculatedNumber를 모두 더하는 메서드
-    private void sumCalculatedNumbers() {
+    private void sumLendCalculatedNumbers() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -129,6 +134,47 @@ public class HomeFragment extends Fragment {
                         // 총합 출력 또는 다른 작업 수행
                         lendSumTextView.setText(String.valueOf(totalCalculatedMoney));
                         lendCountTextView.setText(String.valueOf(lendInfoCount));
+                    })
+                    .addOnFailureListener(e -> {
+                        // 데이터를 가져오지 못했을 때의 처리
+                        Toast.makeText(getActivity(), "데이터 가져오기 실패", Toast.LENGTH_SHORT).show();
+                    });
+        } else {
+            // 사용자가 로그인되어 있지 않은 경우
+            // 로그인 화면으로 이동하도록 처리
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+            Toast.makeText(getActivity(), "로그인 하세요", Toast.LENGTH_SHORT).show();
+        }
+    }
+    // 사용자의 빌린 정보의 calculatedNumber를 모두 더하는 메서드
+    private void sumBorrowCalculatedNumbers() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (currentUser != null) {
+            String uid = currentUser.getUid();
+
+            // 현재 사용자의 '빌려준 정보' 컬렉션에 대한 참조 생성
+            CollectionReference borrowInfoCollection = db.collection("Member").document(uid).collection("빌린 정보");
+
+            borrowInfoCollection.get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+                        int totalCalculatedMoney = 0;
+                        int borrowInfoCount = queryDocumentSnapshots.size();
+
+                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            // document에서 calculatedNumber를 가져와서 더함
+                            if (document.contains("calculatedMoney")) {
+                                String calculatedMoneyString = document.getString("calculatedMoney");
+                                int calculatedMoney = Integer.parseInt(calculatedMoneyString);
+                                totalCalculatedMoney += calculatedMoney;
+                            }
+                        }
+
+                        // 총합 출력 또는 다른 작업 수행
+                        borrowSumTextView.setText(String.valueOf(totalCalculatedMoney));
+                        borrowCountTextView.setText(String.valueOf(borrowInfoCount));
                     })
                     .addOnFailureListener(e -> {
                         // 데이터를 가져오지 못했을 때의 처리
