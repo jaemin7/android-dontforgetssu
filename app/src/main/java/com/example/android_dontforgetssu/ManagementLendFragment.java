@@ -12,16 +12,23 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
 import com.example.android_dontforgetssu.databinding.FragmentManagementLendBinding;
 import com.example.android_dontforgetssu.databinding.TransactionListItemBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
 public class ManagementLendFragment extends Fragment {
     private FragmentManagementLendBinding binding;
-    private ArrayAdapter<String> adapter;
+    private LendInfoAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,66 +41,100 @@ public class ManagementLendFragment extends Fragment {
         binding = FragmentManagementLendBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        ArrayList<TransactionListItem> items = new ArrayList<>();
-        items.add(new TransactionListItem(R.drawable.apppicture, "임재민", "10000", "가나다라마바사아자", "상환까지 D-3"));
-        items.add(new TransactionListItem(R.drawable.icon_boy, "최고은", "200000", "차카타파하", "상환까지 ~~~"));
-        items.add(new TransactionListItem(R.drawable.icon_girl, "정상진", "3000000", "응애응애응애응애", "상환까지 ~~~~~"));
+        adapter = new LendInfoAdapter();
+        fetchLendInfoFromFirebase();
 
         binding.transactionRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        binding.transactionRecyclerView.setAdapter(new TransactionAdapter(items));
+        binding.transactionRecyclerView.setAdapter(adapter);
 
         return view;
     }
 
-    private class TransactionViewHolder extends RecyclerView.ViewHolder {
+    private void fetchLendInfoFromFirebase() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (currentUser != null) {
+            String uid = currentUser.getUid();
+            CollectionReference lendInfoCollection = db.collection("Member").document(uid).collection("빌려준 정보");
+
+            lendInfoCollection.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        ArrayList<LendInfo> lendInfoList = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            // Firebase에서 가져온 데이터를 LendInfo 객체로 변환하여 리스트에 추가
+                            LendInfo lendInfo = document.toObject(LendInfo.class);
+                            lendInfoList.add(lendInfo);
+                            Log.d("FirestoreData", "Name: " + lendInfo.getBorrowerName());
+                        }
+                        adapter.setLendInfoList(lendInfoList);
+                    } else {
+                        Log.w("ManagementLendFragment", "Error getting documents.", task.getException());
+                    }
+                }
+            });
+        } else {
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    private class LendInfoViewHolder extends RecyclerView.ViewHolder {
         private TransactionListItemBinding binding;
 
-        private TransactionViewHolder(TransactionListItemBinding binding) {
+        private LendInfoViewHolder(TransactionListItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
-        private void bind(TransactionListItem item) {
-            binding.transactionImage.setImageResource(item.getImage());
-            binding.transactionName.setText(item.getName());
-            binding.transactionMoney.setText(item.getMoney());
-            binding.transactionMemo.setText(item.getMemo());
-            binding.transactionDate.setText(item.getDate());
+        private void bind(LendInfo lendInfo) {
+            binding.transactionImage.setImageResource(R.drawable.icon_boy);
+            binding.transactionName.setText(lendInfo.getBorrowerName());
+            binding.transactionMoney.setText("빌린 금액 : " + lendInfo.getCalculatedMoney() + "원");
+            binding.transactionMemo.setText("메모 : " + lendInfo.getMemo());
+            binding.transactionDate.setText(lendInfo.getLendAcceptDate());
         }
     }
 
-    private class TransactionAdapter extends RecyclerView.Adapter<TransactionViewHolder>{
+    private class LendInfoAdapter extends RecyclerView.Adapter<LendInfoViewHolder>{
 
-        private ArrayList<TransactionListItem> items;
+        private ArrayList<LendInfo> lendInfoList = new ArrayList<>();
 
-        public TransactionAdapter(ArrayList<TransactionListItem> items) {
-            this.items = items;
+        public void setLendInfoList(ArrayList<LendInfo> lendInfoList) {
+            this.lendInfoList = lendInfoList;
+            notifyDataSetChanged();
+
+            ViewGroup.LayoutParams layoutParams = binding.transactionRecyclerView.getLayoutParams();
+            layoutParams.height = RecyclerView.LayoutParams.WRAP_CONTENT;
+            binding.transactionRecyclerView.setLayoutParams(layoutParams);
         }
         @NonNull
         @Override
-        public TransactionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public LendInfoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.transaction_list_item, parent, false);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = binding.transactionRecyclerView.getChildAdapterPosition(v);
-                    TransactionListItem item = items.get(position);
-                    Log.d("transaction", "item clicked: " + item.getName());
+                    LendInfo lendInfo = lendInfoList.get(position);
+                    Log.d("transaction", "item clicked: " + lendInfo.getBorrowerName());
                 }
             });
 
-            return new TransactionViewHolder(TransactionListItemBinding.bind(view));
+            return new LendInfoViewHolder(TransactionListItemBinding.bind(view));
         }
 
         @Override
-        public void onBindViewHolder(@NonNull TransactionViewHolder holder, int position) {
-            TransactionListItem item = items.get(position);
-            holder.bind(item);
+        public void onBindViewHolder(@NonNull LendInfoViewHolder holder, int position) {
+            LendInfo lendInfo = lendInfoList.get(position);
+            holder.bind(lendInfo);
         }
 
         @Override
         public int getItemCount() {
-            return items.size();
+            return lendInfoList.size();
         }
     }
 }
