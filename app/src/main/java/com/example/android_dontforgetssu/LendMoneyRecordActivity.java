@@ -197,7 +197,10 @@ public class LendMoneyRecordActivity extends AppCompatActivity {
                         public void onSuccess(DocumentReference documentReference) {
                             Toast.makeText(LendMoneyRecordActivity.this, "빌려준 기록 저장 성공", Toast.LENGTH_SHORT).show();
                             // 저장 성공 후 필요한 작업 수행
+                            String generatedDocumentId = documentReference.getId(); // 여기서 생성된 Document ID를 가져옵니다.
+                            // 이제 이 Document ID를 Intent에 추가하여 LendRecordInformationActivity로 전달할 수 있습니다.
                             Intent intent = new Intent(LendMoneyRecordActivity.this, LendRecordInformationActivity.class);
+                            intent.putExtra("documentId", generatedDocumentId);
                             startActivity(intent);
                         }
                     })
