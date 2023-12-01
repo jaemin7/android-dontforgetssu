@@ -40,8 +40,10 @@ public class LendMoneyRecordActivity extends AppCompatActivity {
             if (dialog == global_select_dialog) {
                 String[] global_select_data = getResources().getStringArray(R.array.global_select_dialog);
                 String[] exchange_rate_hint = getResources().getStringArray(R.array.exchange_rate_hint);
+                String[] record_money_hint = getResources().getStringArray(R.array.record_money_hint);
                 binding.lendMoneyRecordExchangeRateTextview.setText(global_select_data[which]);
                 binding.lendMoneyRecordExchangeRateEditText.setHint(exchange_rate_hint[which]);
+                binding.lendMoneyRecordMoneyEditText.setHint(record_money_hint[which]);
             }
         }
     };
@@ -87,6 +89,7 @@ public class LendMoneyRecordActivity extends AppCompatActivity {
                             binding.globalSelectSwitch.setChecked(false);
                             binding.lendMoneyRecordExchangeRateTextview.setText("한국 환율 KRW(₩)");
                             binding.lendMoneyRecordExchangeRateEditText.setHint(null);
+                            binding.lendMoneyRecordMoneyEditText.setHint("금액 입력(원(₩))");
                             showToast(binding.lendMoneyRecordExchangeRateTextview.getText().toString()+"가 선택되었습니다.");
                         }
                     });
@@ -95,6 +98,7 @@ public class LendMoneyRecordActivity extends AppCompatActivity {
                 } else {
                     binding.lendMoneyRecordExchangeRateCard.setVisibility(View.GONE);
                     binding.lendMoneyRecordExchangeRateTextview.setText("한국 환율 KRW(₩)");
+                    binding.lendMoneyRecordMoneyEditText.setHint("금액 입력(원(₩))");
                     showToast(binding.lendMoneyRecordExchangeRateTextview.getText().toString()+"가 선택되었습니다.");
                 }
             }

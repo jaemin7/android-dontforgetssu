@@ -15,4 +15,11 @@
         <item>ex) 1위안 = 180원</item>
         <item>ex) 1동 = 0.05원</item>
     </string-array>
+    <string-array name="record_money_hint">
+        <item>금액 입력(달러($))</item>
+        <item>금액 입력(유로(€))</item>
+        <item>금액 입력(엔(¥))</item>
+        <item>금액 입력(위안(¥))</item>
+        <item>금액 입력(동(₫))</item>
+    </string-array>
 </resources>
