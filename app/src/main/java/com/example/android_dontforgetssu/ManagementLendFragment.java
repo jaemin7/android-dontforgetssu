@@ -120,6 +120,11 @@ public class ManagementLendFragment extends Fragment {
                     int position = binding.transactionRecyclerView.getChildAdapterPosition(v);
                     LendInfo lendInfo = lendInfoList.get(position);
                     Log.d("transaction", "item clicked: " + lendInfo.getBorrowerName());
+
+                    // 클릭된 아이템의 정보를 가지고 DetailInformationActivity로 이동하는 코드
+                    Intent intent = new Intent(v.getContext(), LendManagementDetailInfo.class);
+                    intent.putExtra("lendInfo", lendInfo);
+                    v.getContext().startActivity(intent);
                 }
             });
 

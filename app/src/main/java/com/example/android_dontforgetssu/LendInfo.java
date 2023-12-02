@@ -1,6 +1,8 @@
 package com.example.android_dontforgetssu;
 
-public class LendInfo {
+import java.io.Serializable;
+
+public class LendInfo implements Serializable {
     private String borrowerName;
     private String borrowerPhoneNumber;
     private String lendMoney;
