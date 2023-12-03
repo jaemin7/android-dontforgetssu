@@ -8,6 +8,12 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.android_dontforgetssu.databinding.LendManagementDetailInfoBinding;
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class LendManagementDetailInfo extends AppCompatActivity {
 
@@ -66,5 +72,36 @@ public class LendManagementDetailInfo extends AppCompatActivity {
         } else {
             binding.lendManagementMemo.setText(lendInfo.getMemo());
         }
+
+        binding.lendManagementTransactionOkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (lendInfo != null) {
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    CollectionReference lendInfoCollection = db.collection("Member").document(uid).collection("빌려준 정보");
+                    lendInfoCollection.whereEqualTo("borrowerName", lendInfo.getBorrowerName())
+                            .whereEqualTo("calculatedMoney", lendInfo.getCalculatedMoney())
+                            .get().addOnCompleteListener(task -> {
+                                if(task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        String documentId = document.getId();
+
+                                        db.collection("Member").document(uid).collection("빌려준 정보").document(documentId)
+                                                .delete()
+                                                .addOnSuccessListener(aVoid -> {
+                                                    // 삭제 성공 시의 처리
+                                                    // 리사이클러뷰 갱신
+
+                                                    finish();
+                                                });
+                                    }
+                                } else {
+                                    Log.d("LendManagementDetailInfo", "Error", task.getException());
+                                }
+                            });
+                }
+            }
+        });
     }
 }
