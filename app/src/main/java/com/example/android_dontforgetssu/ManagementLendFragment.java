@@ -130,14 +130,38 @@ public class ManagementLendFragment extends Fragment {
 
             binding.transactionImage.setImageResource(R.drawable.icon_boy);
             binding.transactionName.setText(lendInfo.getBorrowerName());
-            binding.transactionMoney.setText("빌린 금액 : " + lendInfo.getCalculatedMoney() + "원");
+            switch (lendInfo.getCountry()){
+                case("한국 환율 KRW(₩)"):
+                    binding.transactionMoney.setText("빌려준 금액 : " + lendInfo.getCalculatedMoney() + "원"); break;
+                case(""):
+                    binding.transactionMoney.setText("빌려준 금액 : " + lendInfo.getCalculatedMoney() + "원"); break;
+                case("미국 환율 USD($)"):
+                    binding.transactionMoney.setText("빌려준 금액 : " + lendInfo.getLendMoney() + "달러($) = " + lendInfo.getCalculatedMoney() + "원"); break;
+                case("유럽 환율 EUR(€)"):
+                    binding.transactionMoney.setText("빌려준 금액 : " + lendInfo.getLendMoney() + "유로(€) = " + lendInfo.getCalculatedMoney() + "원"); break;
+                case("일본 환율 JPY(¥)"):
+                    binding.transactionMoney.setText("빌려준 금액 : " + lendInfo.getLendMoney() + "엔(¥) = " + lendInfo.getCalculatedMoney() + "원"); break;
+                case("중 국 환율 CNY(¥)"):
+                    binding.transactionMoney.setText("빌려준 금액 : " + lendInfo.getLendMoney() + "위안(¥) = " + lendInfo.getCalculatedMoney() + "원"); break;
+                case("베트남 환율 VND(₫)"):
+                    binding.transactionMoney.setText("빌려준 금액 : " + lendInfo.getLendMoney() + "동(₫) = " + lendInfo.getCalculatedMoney() + "원"); break;
+                default:
+                    break;
+            }
             binding.transactionMemo.setText("메모 : " + lendInfo.getMemo());
             if (daysDiff > 0) {
-                binding.transactionDate.setText("상환까지 D-"+daysDiff);
+                binding.transactionDate.setText("수령까지 D-"+daysDiff);
             } else if (daysDiff == 0) {
-                binding.transactionDate.setText("상환일 D-"+daysDiff);
+                binding.transactionDate.setText("수령까지 D-"+daysDiff);
             } else {
-                binding.transactionDate.setText("연체중 D+"+(-daysDiff));
+                if (lendInfo.getInterest() == "") {
+                    binding.transactionDate.setText("연체중 D+"+(-daysDiff));
+                } else {
+                    binding.transactionDate.setText("연체중 D+"+(-daysDiff));
+                    binding.transactionInterestMoney.setVisibility(View.VISIBLE);
+                    Long interset_money = Long.parseLong(lendInfo.getCalculatedMoney())+(-daysDiff)*Long.parseLong(lendInfo.getInterest());
+                    binding.transactionInterestMoney.setText("이자 : " + lendInfo.getInterest() +"원 -> 수령 금액 : " + interset_money + "원");
+                }
             }
         }
     }

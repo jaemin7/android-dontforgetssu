@@ -69,7 +69,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
                     android:fontFamily="@font/suit_medium"
-                    android:text="상환 예정"
+                    android:text="수령 예정"
                     android:textSize="20dp" />
 
                 <TextView
