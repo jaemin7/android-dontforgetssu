@@ -1,23 +1,24 @@
 package com.example.android_dontforgetssu;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.util.Log;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.android_dontforgetssu.databinding.LendManagementDetailInfoBinding;
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class LendManagementDetailInfo extends AppCompatActivity {
 
     LendManagementDetailInfoBinding binding;
+    AlertDialog alertDialog;
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -76,31 +77,42 @@ public class LendManagementDetailInfo extends AppCompatActivity {
         binding.lendManagementTransactionOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (lendInfo != null) {
-                    FirebaseFirestore db = FirebaseFirestore.getInstance();
-                    String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    CollectionReference lendInfoCollection = db.collection("Member").document(uid).collection("빌려준 정보");
-                    lendInfoCollection.whereEqualTo("borrowerName", lendInfo.getBorrowerName())
-                            .whereEqualTo("calculatedMoney", lendInfo.getCalculatedMoney())
-                            .get().addOnCompleteListener(task -> {
-                                if(task.isSuccessful()) {
-                                    for (QueryDocumentSnapshot document : task.getResult()) {
-                                        String documentId = document.getId();
+                AlertDialog.Builder builder = new AlertDialog.Builder(LendManagementDetailInfo.this);
+                builder.setTitle("거래 완료");
+                builder.setMessage("정말 거래 완료 되었습니까? \n 거래 정보가 삭제됩니다.");
+                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (lendInfo != null) {
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                            CollectionReference lendInfoCollection = db.collection("Member").document(uid).collection("빌려준 정보");
+                            lendInfoCollection.whereEqualTo("borrowerName", lendInfo.getBorrowerName())
+                                    .whereEqualTo("calculatedMoney", lendInfo.getCalculatedMoney())
+                                    .get().addOnCompleteListener(task -> {
+                                        if(task.isSuccessful()) {
+                                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                                String documentId = document.getId();
 
-                                        db.collection("Member").document(uid).collection("빌려준 정보").document(documentId)
-                                                .delete()
-                                                .addOnSuccessListener(aVoid -> {
-                                                    // 삭제 성공 시의 처리
-                                                    // 리사이클러뷰 갱신
-
-                                                    finish();
-                                                });
-                                    }
-                                } else {
-                                    Log.d("LendManagementDetailInfo", "Error", task.getException());
-                                }
-                            });
-                }
+                                                db.collection("Member").document(uid).collection("빌려준 정보").document(documentId)
+                                                        .delete()
+                                                        .addOnSuccessListener(aVoid -> {
+                                                            // 삭제 성공 시의 처리
+                                                            // 리사이클러뷰 갱신
+                                                            startActivity(new Intent(LendManagementDetailInfo.this, NavigationActivity.class));
+                                                            finish();
+                                                        });
+                                            }
+                                        } else {
+                                            Log.d("LendManagementDetailInfo", "Error", task.getException());
+                                        }
+                                    });
+                        }
+                    }
+                });
+                builder.setNegativeButton("취소", null);
+                alertDialog = builder.create();
+                alertDialog.show();
             }
         });
     }
