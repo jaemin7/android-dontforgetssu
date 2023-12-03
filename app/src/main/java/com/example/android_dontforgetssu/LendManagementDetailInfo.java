@@ -79,7 +79,7 @@ public class LendManagementDetailInfo extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(LendManagementDetailInfo.this);
                 builder.setTitle("거래 완료");
-                builder.setMessage("정말 거래 완료 되었습니까? \n 거래 정보가 삭제됩니다.");
+                builder.setMessage("정말 거래 완료 되었습니까? \n 거래 정보가 완료된 거래로 이동됩니다.");
                 builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -87,20 +87,26 @@ public class LendManagementDetailInfo extends AppCompatActivity {
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
                             String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                             CollectionReference lendInfoCollection = db.collection("Member").document(uid).collection("빌려준 정보");
+
                             lendInfoCollection.whereEqualTo("borrowerName", lendInfo.getBorrowerName())
                                     .whereEqualTo("calculatedMoney", lendInfo.getCalculatedMoney())
                                     .get().addOnCompleteListener(task -> {
-                                        if(task.isSuccessful()) {
+                                        if (task.isSuccessful()) {
                                             for (QueryDocumentSnapshot document : task.getResult()) {
                                                 String documentId = document.getId();
 
-                                                db.collection("Member").document(uid).collection("빌려준 정보").document(documentId)
-                                                        .delete()
+                                                // 정보를 완료된 거래 컬렉션으로 이동
+                                                db.collection("Member").document(uid).collection("완료된 거래").document(documentId)
+                                                        .set(document.getData())  // Copy data to CompletedTransactions
                                                         .addOnSuccessListener(aVoid -> {
-                                                            // 삭제 성공 시의 처리
-                                                            // 리사이클러뷰 갱신
-                                                            startActivity(new Intent(LendManagementDetailInfo.this, NavigationActivity.class));
-                                                            finish();
+                                                            // 완료된 거래로 이동 성공 시의 처리
+                                                            // 원래의 정보 삭제
+                                                            document.getReference().delete()
+                                                                    .addOnSuccessListener(aVoid1 -> {
+                                                                        // 리사이클러뷰 갱신
+                                                                        startActivity(new Intent(LendManagementDetailInfo.this, NavigationActivity.class));
+                                                                        finish();
+                                                                    });
                                                         });
                                             }
                                         } else {
