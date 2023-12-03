@@ -57,7 +57,7 @@ public class LendManagementDetailInfo extends AppCompatActivity {
             }
         }
         if (lendInfo.getInterest().equals("")) {
-            binding.lendManagementInterest.setVisibility(View.GONE);
+            binding.lendManagementInterestCard.setVisibility(View.GONE);
         } else {
             binding.lendManagementInterest.setText(lendInfo.getInterest()+"원");
         }

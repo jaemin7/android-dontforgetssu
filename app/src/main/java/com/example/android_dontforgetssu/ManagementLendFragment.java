@@ -24,7 +24,14 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
 public class ManagementLendFragment extends Fragment {
     private FragmentManagementLendBinding binding;
@@ -69,6 +76,22 @@ public class ManagementLendFragment extends Fragment {
                             lendInfoList.add(lendInfo);
                             Log.d("FirestoreData", "Name: " + lendInfo.getBorrowerName());
                         }
+
+                        Collections.sort(lendInfoList, new Comparator<LendInfo>() {
+                            @Override
+                            public int compare(LendInfo lendInfo1, LendInfo lendInfo2) {
+                                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                                try {
+                                    Date date1 = dateFormat.parse(lendInfo1.getLendAcceptDate());
+                                    Date date2 = dateFormat.parse(lendInfo2.getLendAcceptDate());
+                                    return date1.compareTo(date2);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                    return 0;
+                                }
+                            }
+                        });
+
                         adapter.setLendInfoList(lendInfoList);
                     } else {
                         Log.w("ManagementLendFragment", "Error getting documents.", task.getException());
@@ -90,11 +113,32 @@ public class ManagementLendFragment extends Fragment {
         }
 
         private void bind(LendInfo lendInfo) {
+
+            Calendar currentDate = Calendar.getInstance();
+            currentDate.setTime(new Date());
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date lend_accept_date = null;
+            try {
+                lend_accept_date = dateFormat.parse((lendInfo.getLendAcceptDate()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return;
+            }
+
+            long daysDiff = (lend_accept_date.getTime() - currentDate.getTimeInMillis())/(24 * 60 * 60 * 1000);
+
             binding.transactionImage.setImageResource(R.drawable.icon_boy);
             binding.transactionName.setText(lendInfo.getBorrowerName());
             binding.transactionMoney.setText("빌린 금액 : " + lendInfo.getCalculatedMoney() + "원");
             binding.transactionMemo.setText("메모 : " + lendInfo.getMemo());
-            binding.transactionDate.setText(lendInfo.getLendAcceptDate());
+            if (daysDiff > 0) {
+                binding.transactionDate.setText("상환까지 D-"+daysDiff);
+            } else if (daysDiff == 0) {
+                binding.transactionDate.setText("상환일 D-"+daysDiff);
+            } else {
+                binding.transactionDate.setText("연체중 D+"+(-daysDiff));
+            }
         }
     }
 
