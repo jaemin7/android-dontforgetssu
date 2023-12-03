@@ -93,6 +93,10 @@ public class ManagementLendFragment extends Fragment {
                         });
 
                         adapter.setLendInfoList(lendInfoList);
+                        //카드뷰 갯수 세는법
+                        int itemCount = adapter.getItemCount();
+                        binding.fragmentManagementLendExpectedToReceiveNum.setText(String.valueOf(itemCount));
+                        
                     } else {
                         Log.w("ManagementLendFragment", "Error getting documents.", task.getException());
                     }
