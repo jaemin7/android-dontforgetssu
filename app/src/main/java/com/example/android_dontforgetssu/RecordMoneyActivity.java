@@ -39,6 +39,7 @@ public class RecordMoneyActivity extends AppCompatActivity {
             public void onClick(View v){
                 Intent intent = new Intent(RecordMoneyActivity.this,HomeFragment.class);
                 startActivity(intent);
+                finish();
             }
         });
 

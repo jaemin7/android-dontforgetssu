@@ -169,18 +169,18 @@ public class BorrowMoneyRecordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 calculated_Money = calculateMoney(etBorrowMoney,etExchangeRate);
-                saveLendInfo();
+                saveBorrowInfo();
             }
         });
     }
 
-    private void saveLendInfo() {
-        String borrowerName = etLenderName.getText().toString();
-        String borrowerPhoneNumber = etLenderPhoneNumber.getText().toString();
-        String lendMoney = etBorrowMoney.getText().toString();
+    private void saveBorrowInfo() {
+        String lenderName = etLenderName.getText().toString();
+        String lenderPhoneNumber = etLenderPhoneNumber.getText().toString();
+        String borrowMoney = etBorrowMoney.getText().toString();
         String exchangeRate = etExchangeRate.getText().toString();
-        String lendDate = etBorrowDate.getText().toString();
-        String lendAcceptDate = etBorrowAcceptDate.getText().toString();
+        String borrowDate = etBorrowDate.getText().toString();
+        String borrowAcceptDate = etBorrowAcceptDate.getText().toString();
         String interest = etInterest.getText().toString();
         String memo = etMemo.getText().toString();
         String country = binding.borrowMoneyRecordExchangeRateTextview.getText().toString();
@@ -191,19 +191,19 @@ public class BorrowMoneyRecordActivity extends AppCompatActivity {
             String uid = currentUser.getUid();
 
             FirebaseFirestore db = FirebaseFirestore.getInstance();
-            CollectionReference lendInfoCollection = db.collection("Member").document(uid).collection("빌린 정보");
+            CollectionReference borrowInfoCollection = db.collection("Member").document(uid).collection("빌린 정보");
 
-            LendInfo lendInfo = new LendInfo(borrowerName, borrowerPhoneNumber, lendMoney, exchangeRate, lendDate, lendAcceptDate, interest, memo, country, calculatedMoney);
+            BorrowInfo borrowInfo = new BorrowInfo(lenderName, lenderPhoneNumber, borrowMoney, exchangeRate, borrowDate, borrowAcceptDate, interest, memo, country, calculatedMoney);
 
-            lendInfoCollection.add(lendInfo)
+            borrowInfoCollection.add(borrowInfo)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
                             Toast.makeText(BorrowMoneyRecordActivity.this, "빌린 기록 저장 성공", Toast.LENGTH_SHORT).show();
                             // 저장 성공 후 필요한 작업 수행
                             String generatedDocumentId = documentReference.getId(); // 여기서 생성된 Document ID를 가져옵니다.
-                            // 이제 이 Document ID를 Intent에 추가하여 LendRecordInformationActivity로 전달할 수 있습니다.
-                            Intent intent = new Intent(BorrowMoneyRecordActivity.this, LendRecordInformationActivity.class);
+                            // 이제 이 Document ID를 Intent에 추가하여 BorrowRecordInformationActivity로 전달할 수 있습니다.
+                            Intent intent = new Intent(BorrowMoneyRecordActivity.this, BorrowRecordInformationActivity.class);
                             intent.putExtra("documentId", generatedDocumentId);
                             startActivity(intent);
                         }
@@ -211,8 +211,8 @@ public class BorrowMoneyRecordActivity extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(BorrowMoneyRecordActivity.this, "빌려준 기록 저장 실패", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(BorrowMoneyRecordActivity.this, LendRecordInformationActivity.class);
+                            Toast.makeText(BorrowMoneyRecordActivity.this, "빌린 기록 저장 실패", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(BorrowMoneyRecordActivity.this, BorrowRecordInformationActivity.class);
                             startActivity(intent);
                         }
                     });
@@ -224,16 +224,16 @@ public class BorrowMoneyRecordActivity extends AppCompatActivity {
             Toast.makeText(BorrowMoneyRecordActivity.this, "로그인 하세요", Toast.LENGTH_SHORT).show();
         }
     }
-    private int calculateMoney(EditText etLendMoney, EditText etExchangeRate){
+    private int calculateMoney(EditText etBorrowMoney, EditText etExchangeRate){
         if ("한국 환율 KRW(₩)".equals(binding.borrowMoneyRecordExchangeRateTextview.getText().toString())) {
-            float lend_money = Float.parseFloat(etLendMoney.getText().toString());
+            float borrow_money = Float.parseFloat(etBorrowMoney.getText().toString());
             float exchange_rate = 1;
-            calculated_Money = (int) (lend_money * exchange_rate);
+            calculated_Money = (int) (borrow_money * exchange_rate);
         }
         else {
-            float lend_money = Float.parseFloat(etLendMoney.getText().toString());
+            float borrow_money = Float.parseFloat(etBorrowMoney.getText().toString());
             float exchange_rate = Float.parseFloat(etExchangeRate.getText().toString());
-            calculated_Money = (int) (lend_money * exchange_rate);
+            calculated_Money = (int) (borrow_money * exchange_rate);
         } return calculated_Money;
     }
 }

@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:layout_margin="4dp"
         app:cardElevation="4dp"
         app:cardBackgroundColor="@color/gray"
@@ -15,7 +15,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:background="@color/white">
 
             <ImageView
@@ -56,19 +56,32 @@
                 app:layout_constraintTop_toBottomOf="@id/transaction_name" />
 
             <TextView
+                android:id="@+id/transaction_interest_money"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:text="-> 받을 금액 : 11000원"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/transaction_image"
+                app:layout_constraintTop_toBottomOf="@id/transaction_money" />
+
+            <TextView
                 android:id="@+id/transaction_memo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginBottom="6dp"
                 android:text="메모 : 숑숑에서 양파돈까스"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/transaction_image"
-                app:layout_constraintTop_toBottomOf="@id/transaction_money" />
+                app:layout_constraintTop_toBottomOf="@id/transaction_interest_money" />
 
             <TextView
                 android:id="@+id/transaction_date"
