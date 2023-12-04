@@ -252,7 +252,8 @@
         android:text="차용증을 작성하시겠습니까?"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        tools:layout_editor_absoluteX="12dp" />
+        tools:layout_editor_absoluteX="12dp"
+        android:layout_marginLeft="10dp"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

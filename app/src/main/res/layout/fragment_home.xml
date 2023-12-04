@@ -46,7 +46,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="end"
-
+                android:layout_marginRight="25dp"
                 android:src="@drawable/baseline_notifications_24" />
         </FrameLayout>
 
@@ -229,21 +229,23 @@
 
             <Button
                 android:id="@+id/record_money_button"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:textSize="25dp"
                 android:text="돈 거래 기록하기"
                 android:fontFamily="@font/suit_extrabold"
-                android:background="@drawable/apptheme_light_button" />
+                android:background="@drawable/apptheme_light_button"
+                android:layout_marginTop="20dp"
+                />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="만약 거래에 문제가 생겼다면???"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="50dp"
             android:fontFamily="@font/suit_extrabold"
             android:textSize="18dp" />
 
@@ -257,7 +259,8 @@
             android:background="@drawable/apptheme_light_button"
             android:fontFamily="@font/suit_extrabold"
             android:text="변호사와의 법률 상담"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"/>
 
     </LinearLayout>
 
