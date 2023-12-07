@@ -53,10 +53,23 @@
     <activity android:name=".BorrowPromissoryNoteActivity">
 
     </activity>
-
         <activity
             android:name=".LendManagementDetailInfo">
 
+        </activity>
+        <activity android:name="LawyerActivity">
+        </activity>
+        <activity android:name=".Lawyer1Activity">
+        </activity>
+        <activity android:name=".Lawyer2Activity">
+        </activity>
+        <activity android:name=".Lawyer3Activity">
+        </activity>
+        <activity android:name=".Lawyer4Activity">
+        </activity>
+        <activity android:name=".Lawyer5Activity">
+        </activity>
+        <activity android:name=".Lawyer6Activity">
         </activity>
 
     </application>

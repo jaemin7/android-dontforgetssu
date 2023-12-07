@@ -333,7 +333,6 @@
         android:layout_height="48dp"
         android:fontFamily="@font/inter"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="8dp"
         android:text="차용증을 작성하시겠습니까?"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3"

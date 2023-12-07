@@ -52,6 +52,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         Button homeButton = view.findViewById(R.id.record_money_button);
+        Button lawyerButton = view.findViewById(R.id.button2);
 
         lendSumTextView = view.findViewById(R.id.fragment_home_lend_sum);
         lendCountTextView = view.findViewById(R.id.fragment_home_lend_number);
@@ -65,6 +66,13 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Intent recordMoneyIntent = new Intent(getActivity(), RecordMoneyActivity.class);
                 startActivity(recordMoneyIntent);
+            }
+        });
+        lawyerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent lawyerIntent = new Intent(getActivity(), LawyerActivity.class);
+                startActivity(lawyerIntent);
             }
         });
 
